@@ -1,9 +1,9 @@
-import { Anchor, Button, Card, Col, Collapse, Divider, Form, Input, Layout, Menu, Row, Space, Steps, Table, Tag, Typography } from 'antd'
+import { Anchor, Avatar, Button, Card, Col, Collapse, Descriptions, Divider, Empty, FloatButton, Form, Input, Layout, List, Menu, Modal, notification, Row, Space, Steps, Table, Tag, TimePicker, Typography } from 'antd'
 import { Content, Header } from 'antd/es/layout/layout'
 import Sider from 'antd/es/layout/Sider'
 import { useState } from 'react'
 import { BsPerson } from 'react-icons/bs'
-import { GrOrganization } from 'react-icons/gr'
+import { GrAdd, GrOrganization } from 'react-icons/gr'
 import { HiOutlineHome } from 'react-icons/hi'
 import "./styles/dashboard.css";
 import { GiHamburgerMenu } from 'react-icons/gi'
@@ -11,6 +11,8 @@ import { AiOutlineMoneyCollect } from 'react-icons/ai'
 import {faker} from "@faker-js/faker";
 import "./styles/dashboard.css"
 import ButtonGroup from 'antd/es/button/button-group'
+import dayjs from "dayjs";
+import { ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
 
 
 const generateData = () => {
@@ -30,6 +32,7 @@ const data = generateData();
 
 function App() {
   const [collapsed, setCollapsed] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
 // const { Link } = <Anchor />;
 
@@ -37,7 +40,8 @@ function App() {
     <Layout className='container'>
       <Header
         style={{
-          backgroundColor: "white",
+          backgroundColor: "black",
+          color: "white",
         }}>
           <div style={{
             display: "flex",
@@ -50,7 +54,7 @@ function App() {
           </div>
         </Header>
         <Layout>
-          <Sider collapsed={collapsed} theme='light'>
+          <Sider collapsed={collapsed} theme='dark'>
             <Menu
               mode='inline'
               items={[
@@ -107,10 +111,89 @@ function App() {
             </Space>
             <Divider />
             <Card>
-              <Form>
+              <FloatButton  icon={<GrAdd style={{color: "black"}} />} />
+            <Button onClick={()=> {
+              notification.success({
+                message: "User created successfully"
+              })
+            }}>
+                  Show notification
+                </Button>
+                <Button onClick={()=> setModalOpen(true)}>
+                  Add user
+                </Button>
+                
+                <Button type='primary' danger
+                  onClick={() => {
+                    Modal.confirm({
+                      title: 'Are you sure you want to delete this?',
+                      icon: <ExclamationCircleOutlined />,
+                      content: 'Some descriptions',
+                      okText: 'Yes',
+                      okType: 'danger',
+                      cancelText: 'No',
+                    });
+                  }
+                  }
+                  >Delete</Button>
+             
+              <List bordered dataSource={data.slice(0, 5)} 
+              renderItem={(item) =>
+                {return <List.Item >
+                  <Descriptions title="Users Details" bordered >
+                <Descriptions.Item label={"Name"}>{item.name} </Descriptions.Item>
+                <Descriptions.Item label={"Roll"}>{item.email}</Descriptions.Item>
+                <Descriptions.Item label={"Address"}> {item.status ? "Active" : "Not Active"}
+                </Descriptions.Item>
+              </Descriptions>
+                </List.Item>}
+              }/>
+              <List>
+                <List.Item>Hello</List.Item>
+                <List.Item>test</List.Item>
+                <List.Item>test1</List.Item>
+              </List>
+              <Descriptions title="Users data" bordered>
+                <Descriptions.Item span={2} label={"Name"}>John Doe</Descriptions.Item>
+                <Descriptions.Item label={"Roll"}>18</Descriptions.Item>
+                <Descriptions.Item label={"Adrress"}>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Libero cupiditate excepturi nam, doloremque quae 
+                  necessitatibus harum expedita distinctio aliquam obcaecati!
+                </Descriptions.Item>
+              </Descriptions>
+              <Empty />
+              <Avatar 
+                  size={"large"}
+                  src={"https://avatars.slack-edge.com/2021-09-12/2466008637783_30bd329abf6ea2c53afc_192.jpg"}
+                />
+              <Form 
+                onFinish={(values) => {
+                  console.log(values);
+                }}
+                layout= "vertical">
                 <Form.Item label={"Name"} >
-                  <Input
-                  placeholder='Name' />
+                  <Input />
+                </Form.Item>
+                <Form.Item label={"Email"} >
+                  <Input type="email"/>
+                </Form.Item>
+                <Form.Item label={"Password"} >
+                  <Input type="password"/>
+                </Form.Item>
+                <Form.Item name={"time"} label={"pick some time"} >
+                <TimePicker 
+                  defaultValue={dayjs("00:00:00", "HH:mm:ss")}
+                  format="HH:mm:ss"
+                  placeholder="Select time"
+                  style={{ width: 160 }}
+                  size="large"
+                
+                    />
+                </Form.Item>
+               
+                <Form.Item>
+                  <Button htmlType="submit" type="primary">Sign up</Button>
                 </Form.Item>
               </Form>
             </Card>
@@ -189,6 +272,23 @@ function App() {
             </Row>
           </Content>
         </Layout>
+        <Modal open={modalOpen}
+        onCancel={() => setModalOpen(false)}
+
+         title="Add a new user" >
+          <Form>
+            <Form.Item label={"Name"} >
+              <Input />
+            </Form.Item>
+            <Form.Item label={"Email"} >
+              <Input type="email"/>
+            </Form.Item>
+            <Form.Item label={"Password"} >
+              <Input />
+            </Form.Item>
+          </Form>
+        </Modal>
+       
     </Layout>
   )
 }
