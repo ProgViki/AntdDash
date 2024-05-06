@@ -12,7 +12,7 @@ import {faker} from "@faker-js/faker";
 import "./styles/dashboard.css"
 import ButtonGroup from 'antd/es/button/button-group'
 import dayjs from "dayjs";
-import { ExclamationCircleOutlined, PlusOutlined } from '@ant-design/icons'
+import { ExclamationCircleOutlined, PayCircleOutlined, PlusOutlined } from '@ant-design/icons'
 
 
 const generateData = () => {
@@ -73,12 +73,18 @@ function App() {
                       key: 'all_users',
                       icon: <BsPerson />,
                     },
+                    
                   ] 
                 },
                 {
                   label: 'About us',
                   key: 'about_us',
                   icon: <GrOrganization />
+                },
+                {
+                  label: 'Pricing',
+                  key: 'user_pricing',
+                  icon: <PayCircleOutlined />
                 },
               ]}
               >
@@ -112,7 +118,8 @@ function App() {
             <Divider />
             <Card>
               <FloatButton  icon={<GrAdd style={{color: "black"}} />} />
-            <Button onClick={()=> {
+              <div className="flex flex-row items-center gap-8 ">
+              <Button onClick={()=> {
               notification.success({
                 message: "User created successfully"
               })
@@ -136,6 +143,8 @@ function App() {
                   }
                   }
                   >Delete</Button>
+              </div>
+            
              
               <List bordered dataSource={data.slice(0, 5)} 
               renderItem={(item) =>
