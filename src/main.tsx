@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import "antd/dist/reset.css"
-import { ConfigProvider } from 'antd'
+// import { ConfigProvider } from 'antd'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ConfigProvider theme={{
+    {/* <ConfigProvider theme={{
       token: {
         colorPrimary: "#2123bf",
         colorBgLayout: "#313131",
@@ -16,6 +16,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       },
     }}>
       <App/>
-    </ConfigProvider>
+    </ConfigProvider> */}
+    <App />
   </React.StrictMode>,
 )
