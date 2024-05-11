@@ -40,8 +40,8 @@ function DashBoard() {
     <Layout className='container'>
       <Header
         style={{
-          backgroundColor: "black",
-          color: "white",
+          backgroundColor: "white",
+          color: "black",
         }}>
           <div style={{
             display: "flex",
@@ -54,7 +54,7 @@ function DashBoard() {
           </div>
         </Header>
         <Layout>
-          <Sider collapsed={collapsed} theme='dark'>
+          <Sider collapsed={collapsed} theme='light'>
             <Menu
               mode='inline'
               items={[
@@ -118,7 +118,7 @@ function DashBoard() {
             <Divider />
             <Card>
               <FloatButton  icon={<GrAdd style={{color: "black"}} />} />
-              <div className="flex flex-row items-center gap-8 ">
+              <div className="flex flex-row items-center gap-8 mb-4">
               <Button onClick={()=> {
               notification.success({
                 message: "User created successfully"
@@ -236,6 +236,7 @@ function DashBoard() {
                 <Table 
                   dataSource={data} 
                   style={{ marginTop: 10, }}
+                  pagination={false}
                   columns={[
                     {
                       dataIndex: "id",
@@ -249,17 +250,18 @@ function DashBoard() {
                     },
                     {
                       dataIndex: "email",
-                      title: "Email Id",
+                      title: "Email",
                       key: "email",
                     },
                     {
                       dataIndex: "status",
-                      title: "Email Id",
+                      title: "status",
                       render: (val) => 
                         val ? <Tag>Active</Tag> : <Tag>Inactive</Tag>
                     },
                     {
                       dataIndex: "Actions",
+                      title: "Actions",
                       render: () => <ButtonGroup>
                         <Button>Edit</Button>
                         <Button type='primary' danger>Delete</Button>
