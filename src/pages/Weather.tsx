@@ -27,9 +27,9 @@ const Weather = (props: Props) => {
             <h1 className="text-4xl font-thin">Weather <span className="font-black">Forecast</span></h1>
             <p className="text-sm mt-2">Enter below a place you want to know the weather of and select an option from the dropdown</p>
 
-            <div className="flex mt-10 md:mt-4">
+            <div className="flex mt-10 md:mt-4 justify-center items-center">
                 <input type="text" placeholder="Enter a place" value={term} onChange={onInputChange}
-                className="px-2 py-1 mt-10 rounded-l-md border-2 border-white" />
+                className="px-2 py-1 rounded-l-md border-2 border-white" />
 
                 {options.map((option: {name: string }) => (
                         <p>{option.name}</p> 

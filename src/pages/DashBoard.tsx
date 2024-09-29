@@ -236,7 +236,7 @@ function DashBoard() {
                 <Table 
                   dataSource={data} 
                   style={{ marginTop: 10, }}
-                  pagination={false}
+                  // pagination={false}
                   columns={[
                     {
                       dataIndex: "id",
